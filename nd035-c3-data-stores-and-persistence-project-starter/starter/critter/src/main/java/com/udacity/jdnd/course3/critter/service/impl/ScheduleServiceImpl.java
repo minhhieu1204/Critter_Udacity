@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class ScheduleServiceImpl implements ScheduleService {
 
     @Autowired
@@ -42,6 +41,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     private MapperUtil mapperUtil;
 
     @Override
+    @Transactional
     public ScheduleDTO saveSchedule(ScheduleDTO scheduleDTO) {
         try {
             ScheduleEntity scheduleEntity = mapperUtil.map(scheduleDTO, ScheduleEntity.class);

@@ -20,7 +20,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class PetServiceImpl implements PetService {
 
     @Autowired
@@ -33,6 +32,7 @@ public class PetServiceImpl implements PetService {
     private MapperUtil mapperUtil;
 
     @Override
+    @Transactional
     public PetDTO savePet(PetDTO petDTO) {
         try {
 

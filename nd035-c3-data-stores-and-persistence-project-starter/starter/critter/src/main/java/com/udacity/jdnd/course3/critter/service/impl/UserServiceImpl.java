@@ -22,7 +22,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -40,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private MapperUtil mapperUtil;
 
-
+    @Transactional
     public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
         try {
             CustomerEntity customer = mapperUtil.map(customerDTO, CustomerEntity.class);
@@ -93,6 +92,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) {
         try {
             EmployeeEntity employeeEntity = mapperUtil.map(employeeDTO, EmployeeEntity.class);
@@ -105,6 +105,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public EmployeeDTO setAvailable(Set<DayOfWeek> dayOfWeeks, long employeeId) {
         try {
             EmployeeEntity employeeEntity = employeeRepository.findById(employeeId).orElse(null);
