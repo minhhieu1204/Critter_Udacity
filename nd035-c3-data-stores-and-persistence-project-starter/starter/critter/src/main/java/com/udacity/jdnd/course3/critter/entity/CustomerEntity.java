@@ -14,7 +14,6 @@ import java.util.List;
 @Data
 public class CustomerEntity extends UserEntity{
 
-    @Column(length = 10)
     private String phoneNumber;
 
     @OneToMany(mappedBy = "customer")

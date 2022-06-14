@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -15,17 +16,19 @@ public class ScheduleEntity {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
-    @OneToMany(mappedBy = "schedule")
+    @ManyToMany
+    @JoinTable(name = "schedule_employee", joinColumns = @JoinColumn(name = "schedule_id"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private List<EmployeeEntity> employees;
 
-    @OneToMany(mappedBy = "schedule")
+    @ManyToMany
+    @JoinTable(name = "schedule_pet", joinColumns = @JoinColumn(name = "schedule_id"), inverseJoinColumns = @JoinColumn(name = "pet_id"))
     private List<PetEntity> pets;
 
     private LocalDate date;
 
+    @Column
     @ElementCollection(targetClass = EmployeeSkill.class)
-    @CollectionTable(name = "employee_skills")
-    private List<EmployeeSkill> activities;
+    private Set<EmployeeSkill> activities;
 }

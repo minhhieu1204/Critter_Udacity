@@ -4,8 +4,10 @@ import com.udacity.jdnd.course3.critter.utils.EmployeeSkill;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -13,15 +15,14 @@ import java.util.List;
 @Data
 public class EmployeeEntity extends UserEntity{
 
+    @Column
     @ElementCollection(targetClass = EmployeeSkill.class)
-    @CollectionTable(name = "employee_skills")
-    private List<EmployeeSkill> skills;
+    private Set<EmployeeSkill> skills;
 
+    @Column
     @ElementCollection(targetClass = DayOfWeek.class)
-    @CollectionTable(name = "days_of_week")
-    private List<DayOfWeek> daysAvailable;
+    private Set<DayOfWeek> daysAvailable;
 
-    @ManyToOne
-    @JoinColumn(name = "schedule_id")
-    private ScheduleEntity schedule;
+    @ManyToMany(mappedBy = "employees")
+    private List<ScheduleEntity> schedules;
 }

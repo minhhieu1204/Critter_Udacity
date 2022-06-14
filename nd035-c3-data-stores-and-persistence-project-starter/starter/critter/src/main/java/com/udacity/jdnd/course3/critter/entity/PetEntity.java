@@ -5,6 +5,7 @@ import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -26,8 +27,7 @@ public class PetEntity {
     @JoinColumn(name = "customer_id")
     private CustomerEntity customer;
 
-    @ManyToOne
-    @JoinColumn(name = "schedule_id")
-    private ScheduleEntity schedule;
+    @ManyToMany(mappedBy = "pets")
+    private List<ScheduleEntity> schedules;
 
 }
